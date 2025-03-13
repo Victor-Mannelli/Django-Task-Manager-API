@@ -3,7 +3,6 @@ from pathlib import Path
 
 # variables
 
-AUTH_USER_MODEL = "users.User"
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 POSTGRES_USERNAME = os.getenv("POSTGRES_USERNAME")
@@ -27,11 +26,7 @@ INSTALLED_APPS = [
     # Third-party
     "rest_framework",  # Django REST Framework
     # Local apps
-    "apps.core",
-    "apps.users",
-    "apps.projects",
-    "apps.tasks",
-    "apps.comments",
+    "api"
 ]
 
 ROOT_URLCONF = "config.urls"
