@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:latest
-    container_name: taskmanager
+    container_name: task_manager
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USERNAME}
@@ -13,7 +13,7 @@ services:
       retries: 5
       timeout: 3s
     ports:
-      - "5431:5432"
+      - "5430:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
