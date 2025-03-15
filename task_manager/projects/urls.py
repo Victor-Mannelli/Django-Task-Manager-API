@@ -1,6 +1,7 @@
+from .views import handleProjects, handleProjectById
 from django.urls import path
-from .views import fetchProjectsList
 
 projectUrlPatterns = [
-  path('projects/', fetchProjectsList)
+  path('projects', handleProjects),
+  path('projects/<int:id>', handleProjectById),
 ]
