@@ -5,7 +5,7 @@ venv:
 	python3 -m venv venv
 
 deps:
-	pip freeze > requirements/base.txt
+	pip freeze > requirements.txt
 
 dbsetup: # applies migrations to db
 	python3 manage.py migrate 
