@@ -1,5 +1,8 @@
+from task_manager.modules.users.urls import usersUrlPatterns
+from task_manager.modules.projects.urls import projectsUrlPatterns
+from task_manager.modules.tasks.urls import tasksUrlPatterns
+from task_manager.modules.comments.urls import commentsUrlPatterns
 from rest_framework.urlpatterns import format_suffix_patterns
-from .projects.urls import projectUrlPatterns
 from django.contrib import admin
 from django.urls import path
 
@@ -7,6 +10,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-urlpatterns += projectUrlPatterns
+urlpatterns += usersUrlPatterns
+urlpatterns += projectsUrlPatterns
+urlpatterns += tasksUrlPatterns
+urlpatterns += commentsUrlPatterns
 
 urlpatterns = format_suffix_patterns(urlpatterns)

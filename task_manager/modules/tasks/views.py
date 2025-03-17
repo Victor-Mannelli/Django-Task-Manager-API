@@ -1,42 +1,42 @@
+from task_manager.serializers import TaskSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from task_manager.models import Task
 from rest_framework import status
-from .serializers import ProjectSerializer
-from ..models import Project
 
 
 @api_view(["GET", "POST"])
-def handleProjects(request, format=None):
+def handleTasks(request, format=None):
     if request.method == "GET":
-        projects = Project.objects.all()
-        serializer = ProjectSerializer(projects, many=True)
+        tasks = Task.objects.all()
+        serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
 
     if request.method == "POST":
-        serializer = ProjectSerializer(data=request.data)
+        serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(["GET", "PUT", "DELETE"])
-def handleProjectById(request, id, format=None):
+def handleTaskById(request, id, format=None):
     try:
-        db_project = Project.objects.get(pk=id)
-    except Project.DoesNotExist:
+        db_task = Task.objects.get(pk=id)
+    except Task.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
-        serializer = ProjectSerializer(db_project)
+        serializer = TaskSerializer(db_task)
         return Response(serializer.data)
 
     if request.method == "PUT":
-        serializer = ProjectSerializer(db_project, data=request.data)
+        serializer = TaskSerializer(db_task, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == "DELETE":
-        db_project.delete()
+        db_task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
