@@ -31,7 +31,7 @@ def handleCommentById(request, id, format=None):
         return Response(serializer.data)
 
     if request.method == "PUT":
-        serializer = CommentSerializer(db_comment, data=request.data)
+        serializer = CommentSerializer(db_comment, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

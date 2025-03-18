@@ -31,7 +31,7 @@ def handleProjectById(request, id, format=None):
         return Response(serializer.data)
 
     if request.method == "PUT":
-        serializer = ProjectSerializer(db_project, data=request.data)
+        serializer = ProjectSerializer(db_project, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

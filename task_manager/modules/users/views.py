@@ -31,7 +31,7 @@ def handleUserById(request, id, format=None):
         return Response(serializer.data)
 
     if request.method == "PUT":
-        serializer = UserSerializer(db_user, data=request.data)
+        serializer = UserSerializer(db_user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

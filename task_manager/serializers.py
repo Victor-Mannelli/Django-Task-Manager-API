@@ -15,9 +15,11 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    assignees = UserSerializer(many=True)
+    # project = ProjectSerializer() #* add this to change the project id to the actual project info
     class Meta:
         model = Task
-        fields = ["id", "title", "description", "due_date", "created_at", "project_id"]
+        fields = "__all__"  # Includes project and assignees correctly
 
 
 class CommentSerializer(serializers.ModelSerializer):
