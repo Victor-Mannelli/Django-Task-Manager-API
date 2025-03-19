@@ -16,13 +16,10 @@ def handleTasks(request, format=None):
         try:
             serializer = TaskSerializer(data=request.data)
             if serializer.is_valid():
-                print("serializer is valid")
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                print("serializer is not valid")
-                print(serializer.errors)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
         except Exception as e:
             print(f"Error creating task: {e}")  # Properly log the exception
             return Response(
@@ -47,7 +44,7 @@ def handleTaskById(request, id, format=None):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     if request.method == "DELETE":
         db_task.delete()

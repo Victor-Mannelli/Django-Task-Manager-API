@@ -11,18 +11,19 @@ class UserSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ["id", "name", "description", "owner"]
+        fields = "__all__"  # Includes project and assignees correctly
 
 
 class TaskSerializer(serializers.ModelSerializer):
     assignees = UserSerializer(many=True)
+
     # project = ProjectSerializer() #* add this to change the project id to the actual project info
     class Meta:
         model = Task
-        fields = "__all__"  # Includes project and assignees correctly
+        fields = "__all__"
 
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ["id", "text", "created_at", "user_id", "task_id"]
+        fields = "__all__"
