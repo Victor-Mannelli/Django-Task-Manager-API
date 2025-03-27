@@ -1,12 +1,12 @@
 from task_manager.serializers import RegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
+from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework import status
-from django.contrib.auth import authenticate
 
-
-class RegisterView(APIView):
+# Class-Based Views (CBV)
+class UserRegistrationView(APIView):
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
