@@ -1,5 +1,6 @@
 from task_manager.serializers import RegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
@@ -7,6 +8,8 @@ from rest_framework import status
 
 # Class-Based Views (CBV)
 class UserRegistrationView(APIView):
+    permission_classes = [AllowAny]
+    
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
@@ -19,6 +22,8 @@ class UserRegistrationView(APIView):
 
 
 class LoginView(APIView):
+    permission_classes = [AllowAny]
+    
     def post(self, request):
         username = request.data.get("username")
         password = request.data.get("password")
