@@ -1,6 +1,5 @@
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
 from task_manager.serializers import UserSerializer
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from task_manager.models import User
 from rest_framework import status
